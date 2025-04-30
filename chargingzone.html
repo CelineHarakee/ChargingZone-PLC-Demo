@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welcome to ChargingZone</title>
+  <style>
+    body {
+      background-color: #ededfc;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      font-size: 20px;
+    }
+    .intro {
+      text-align: center;
+    }
+    .content {
+      max-width: 900px;
+      margin-top: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    h2 {
+      color: #005b96;
+      font-size: 40px;
+    }
+    p {
+      color: #555;
+    }
+    li {
+      color: #555;
+      margin-top: 5px;
+    }
+    h3 {
+      color: #005b96;
+      margin-top: 30px;
+      font-size: 27px;
+    }
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      color: #555;
+    }
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="intro">
+    <h2 style="margin-top: 50px;">AI-Powered Powerline Communication (PLC)</h2>
+    <p style="font-size: 17px;">Research in Computing - Spring 2025</p>
+    <p style="font-size: 17px;">Celine Al Harake & Layal Canoe</p>
+  </div>
+
+  <div class="content">
+    <h3 style="margin-top: 50px;">Welcome!</h3>
+    <p>Thank you for connecting! This captive portal introduces our research project that explores the integration of AI into Powerline Communication (PLC) networks, aiming to enhance security, optimize performance, and enable intelligent monitoring.</p>
+
+    <h3>About the Project</h3>
+    <p>Powerline Communication (PLC) uses electrical wiring for data transmission but faces security risks, interference, and limited optimization. AI techniques enhance PLC by improving security, optimizing bandwidth, and minimizing disruptions.</p>
+
+    <h3>Research Objectives</h3>
+    <ul>
+      <li>Analyze common security threats and challenges in PLC networks.</li>
+      <li>Develop AI models to detect intrusions and anomalies in real-time.</li>
+      <li>Design a framework for intelligent monitoring and automatic network tuning.</li>
+    </ul>
+
+    <h3>Importance of the Research</h3>
+    <p>PLC has great potential for smart homes, IoT, and industrial systems, but it faces serious challenges in security and reliability. Our research shows how integrating AI can make PLC a more secure, and efficient communication solution for the future.</p>
+
+    <h3>Learn More</h3>
+    <p>For more information about our research or technical details, please check out our full paper on ResearchGate. Thank you for your interest in advancing secure smart communication!</p>
+    <p><a href="https://www.researchgate.net/publication/391217469_AI-Powered_Powerline_Communication_PLC" target="_blank">Read Full Paper Here!</a></p>
+
+    <h3>Project Authors</h3>
+    <div style="display: flex; font-size: 20px; color: #555; padding-left: 10px; flex-wrap: wrap;">
+      <div style="min-width: 250px;">
+        <strong>Celine Al Harake</strong><br>
+        <a href="https://www.linkedin.com/in/celine-al-harake-7710b1200" >LinkedIn</a><br>
+        <a href="https://github.com/CelineHarakee">GitHub</a><br>
+        Email: <a href="mailto:ceaalharake@effat.edu.sa">ceaalharake@effat.edu.sa</a>
+      </div>
+
+      <div style="min-width: 250px; margin-left: 100px;">
+        <strong>Layal Canoe</strong><br>
+        <a href="https://www.linkedin.com/in/layal-canoe-a213792ab/">LinkedIn</a><br>
+        <a href="https://github.com/layalcanoe">GitHub</a><br>
+        Email: <a href="mailto:laacanoe@effat.edu.sa">laacanoe@effat.edu.sa</a>
+      </div>
+    </div>
+</div>
+
+    <footer>
+    <div style="margin-top: 30px; font-size: 0.8em;">
+      &copy; Effat Project Fair 2025
+    </div>
+    </footer>
+
+<canvas id="fireworks" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+<script>
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+  
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+  
+    const fireworks = [];
+  
+    function createFirework() {
+      const x = random(100, canvas.width - 100);
+      const y = random(100, canvas.height / 2);
+      const particles = [];
+      const colors = ['#ff5050', '#ffd700', '#50ff50', '#50c0ff', '#ff50c0'];
+  
+      for (let i = 0; i < 50; i++) {
+        particles.push({
+          x: x,
+          y: y,
+          dx: random(-3, 3),
+          dy: random(-3, 3),
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 100
+        });
+      }
+  
+      fireworks.push(particles);
+    }
+  
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+      fireworks.forEach((firework, index) => {
+        firework.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.x += p.dx;
+          p.y += p.dy;
+          p.life--;
+        });
+  
+        fireworks[index] = firework.filter(p => p.life > 0);
+  
+        if (fireworks[index].length === 0) {
+          fireworks.splice(index, 1);
+        }
+      });
+  
+      requestAnimationFrame(animate);
+    }
+  
+    window.addEventListener('load', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+  
+      for (let i = 0; i < 5; i++) { // Create 5 fireworks when page opens
+        setTimeout(createFirework, i * 500);
+      }
+  
+      animate();
+  
+      // Stop the fireworks after 5 seconds
+      setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.remove();
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
