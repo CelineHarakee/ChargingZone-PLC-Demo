@@ -1,0 +1,11 @@
+[Unit]
+Description=ChargingZone Hotspot
+After=network.target
+
+[Service]
+ExecStart=/usr/sbin/hostapd /etc/hostapd/hostapd.conf
+ExecStartPost=/bin/bash -c 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
